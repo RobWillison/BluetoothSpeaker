@@ -22,7 +22,7 @@ class Display:
         self.artist = 'Unknown'
         self.album = 'Unknown'
 
-        self.displayState = [bytearray('=' for i in range(16), 'utf-8'), bytearray('=' for i in range(16), 'utf-8')]
+        self.displayState = [bytearray('Bluetooth       ', 'utf-8'), bytearray('Bluetooth       ', 'utf-8')]
         self.displayChanged = True
         self.thread = threading.Thread(target=self.runDisplayUpdate)
         self.thread.start()
