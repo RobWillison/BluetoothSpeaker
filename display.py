@@ -42,11 +42,9 @@ class Display:
 
         for i in range(16):
             frame = [[], []]
-            print(i)
-            print(self.displayState[0])
-            print(newState[1])
-            frame[0] = list(self.displayState[0][0:i]) + list(newState[0][i:-1])
-            frame[1] = list(self.displayState[1][0:i]) + list(newState[1][i:-1])
+
+            frame[0] = self.displayState[0][0][0:i] + newState[0][i:-1]
+            frame[1] = self.displayState[0][1][0:i] + newState[1][i:-1]
             time.sleep(0.15)
 
     def updateDisplay(self, displayData):
