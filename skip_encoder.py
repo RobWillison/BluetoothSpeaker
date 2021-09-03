@@ -3,7 +3,7 @@ import time
 
 class SkipEncoder:
     def __init__(self, leftPin, rightPin, player):
-        self.last_tick = None
+        self.last_tick = 0
         self.tick_count = 0
         self.encoder = Encoder(leftPin, rightPin, self.onChange)
 
