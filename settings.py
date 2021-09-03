@@ -30,7 +30,7 @@ class Settings:
 
     def changeColour(self, direction):
         self.colourValue += direction
-        self.display.writeText('Change Colour', '[' + '='*self.colourValue.ljust(14) + ']')
+        self.display.writeText('Change Colour', '[' + ('='*self.colourValue).ljust(14) + ']')
 
     def pair(self):
         self.display.writeText('Pairing')
