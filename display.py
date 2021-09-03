@@ -54,9 +54,10 @@ class Display:
             print(row)
             self.lcd.setCursor(0, row_index)
             for char_index, char in enumerate(row):
-                self.lcd.setCursor(char_index, row_index)
                 if char != -1:
                     self.lcd.write(char)
+                else:
+                    self.lcd.setCursor(char_index+1, row_index)
 
     def pauseSymbol(self):
         return [
