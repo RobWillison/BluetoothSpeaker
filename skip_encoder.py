@@ -21,7 +21,9 @@ class SkipNStettingEncoder:
 
     def handlePress(self, pin):
         print('CLICKED')
-        self.buttonLock.acquire(False)
+        if !self.buttonLock.acquire(False):
+            return
+            
         now = time.time()
         print(now - self.last_click)
         if (now - self.last_click) < 1:
