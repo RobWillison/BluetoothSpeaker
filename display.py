@@ -36,7 +36,10 @@ class Display:
         for index, row in enumerate(self.displayState):
             self.lcd.setCursor(0, index)
             for char in row:
-                self.lcd.write(char)
+                if isinstance(char, int):
+                    self.lcd.write(char)
+                else:
+                    self.lcd.write(bytearray(char,'utf-8')[0])
 
     def pauseSymbol(self):
         return [
