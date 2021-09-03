@@ -12,8 +12,12 @@ send "\r"
 
 expect "# "
 send "default-agent\r"
-expect "Default agent request successful"
+expect "agent"
 send "\r"
 
 expect "# "
 send "discoverable on\r"
+
+expect "Authorize "
+send "yes\r"
+send "exit\r"
