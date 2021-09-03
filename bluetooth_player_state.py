@@ -17,6 +17,7 @@ class BluetoothPlayerState:
         else:
             line1[15] = 0
 
+        self.player.togglePaused()
         self.display.writeData(line1, line2)
 
     def activate(self):
