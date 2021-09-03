@@ -40,7 +40,7 @@ class Display:
         newState[0] = bytearray(newTrack.ljust(16), 'utf-8')
         newState[1] = bytearray(newArtist.ljust(16), 'utf-8')
 
-        for i in range(16):
+        for i in range(16, 0, -1):
             frame = [[], []]
 
             frame[0] = self.displayState[0][0][0:i] + newState[0][i:-1]
