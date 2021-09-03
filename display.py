@@ -45,9 +45,8 @@ class Display:
 
             frame[0] = self.displayState[0][0][0:i] + newState[0][i:-1]
             frame[1] = self.displayState[0][1][0:i] + newState[1][i:-1]
-
+            print(frame[0])
             self.displayState.append(frame)
-            time.sleep(0.5)
 
     def updateDisplay(self, displayData):
         self.lcd.clear()
