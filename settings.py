@@ -5,6 +5,7 @@ class Settings:
         self.open = False
         self.options = ['Change Colour', 'Pair Device']
         self.currentPosition = 0
+        self.item_selected = False
 
     def openClose(self):
         if self.open:
@@ -23,5 +24,17 @@ class Settings:
 
         self.display.writeText('Settings', self.options[self.currentPosition])
 
+    def changeColour(self):
+        self.display.writeText('Change Colour', '[=             ]')
+
     def click(self):
+        if self.item_selected:
+            self.item_selected = False
+            self.display.writeText('Settings', self.options[0])
+        else:
+            self.item_selected = True
+            if self.currentPosition == 0:
+                self.changeColour()
+            else:
+                print('PAIRING')
         print('Clicked')
