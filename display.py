@@ -40,7 +40,7 @@ class Display:
         newState[1] = bytearray(self.cropText(newArtist).ljust(16), 'utf-8')
 
         frames = []
-        for i in range(15, 0, -1):
+        for i in range(15, -1, -1):
             frame = [[], []]
 
             frame[0] = [-1]*i + list(newState[0][i:-1])
