@@ -12,7 +12,7 @@ class Display:
 
     def cropText(self, text):
         if len(text) > 14:
-            return text[0..12] + '...'
+            return text[0:11] + '...'
         return text
 
 
