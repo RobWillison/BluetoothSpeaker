@@ -19,6 +19,7 @@ class SkipNStettingEncoder:
             self.button_down_time = time.time()
         else:
             duration = time.time() - self.button_down_time
+            print(duration)
             if duration < 1:
                 self.player.togglePaused()
 
