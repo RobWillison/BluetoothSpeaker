@@ -27,7 +27,7 @@ class Display:
 
     def pausedStatusChanged(self, paused):
         if paused:
-            self.lcd.setCursor(15, 1)
+            self.lcd.setCursor(15, 0)
             self.lcd.printCustomSymbol(1)
         else:
             self.lcd.setCursor(15, 0)
