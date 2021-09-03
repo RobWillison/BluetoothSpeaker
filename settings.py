@@ -1,4 +1,5 @@
 import math
+import json
 
 class Settings:
     def __init__(self, display):
