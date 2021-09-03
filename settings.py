@@ -35,8 +35,8 @@ class Settings:
 
         if self.colourValue < 0:
             self.colourValue = 0
-        if self.colourValue > steps:
-            self.colourValue = steps
+        if self.colourValue > steps-1:
+            self.colourValue = steps-1
 
         t = (180/steps) * self.colourValue
         r = int((abs(math.sin(3.14*t/180)))*255);
