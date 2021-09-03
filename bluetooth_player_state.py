@@ -6,7 +6,7 @@ class BluetoothPlayerState:
         self.player = player
         self.encoder = encoder
 
-    def active(self):
+    def activate(self):
         displayTrackInfo()
 
     def displayTrackInfo(self):

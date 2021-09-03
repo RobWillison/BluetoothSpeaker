@@ -17,7 +17,7 @@ e = SkipNStettingEncoder(4, 22, 17)
 s = SettingsState(d, p, e)
 bp = BluetoothPlayerState(d, p, e)
 
-bp.ative()
+bp.activate()
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
