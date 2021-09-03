@@ -13,7 +13,7 @@ class SkipNStettingEncoder:
 
         self.button_down_time = 0
         GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(button, GPIO.RISING, callback=self.handlePress, bouncetime=200)
+        GPIO.add_event_detect(button, GPIO.RISING, callback=self.handlePress, bouncetime=500)
 
     def handlePress(self, pin):
         duration = 0
