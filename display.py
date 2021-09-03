@@ -8,9 +8,9 @@ class Display:
 
         self.lcd.setRGB(10, 64, 10)
         self.lcd.setCursor(0,0)
-        self.lcd.printout('Bluetooth Speaker')
+        self.lcd.printout('Bluetooth       ')
         self.lcd.setCursor(0,1)
-        self.lcd.printout('By Rob')
+        self.lcd.printout('Speaker         ')
 
         self.lcd.createCustomSymbol(0, self.pauseSymbol())
         self.lcd.createCustomSymbol(1, self.arrowSymbol())
@@ -22,7 +22,7 @@ class Display:
         self.artist = 'Unknown'
         self.album = 'Unknown'
 
-        self.displayState = [[bytearray('Bluetooth       ', 'utf-8'), bytearray('Bluetooth       ', 'utf-8')]]
+        self.displayState = [[bytearray('Bluetooth       ', 'utf-8'), bytearray('Speaker         ', 'utf-8')]]
 
         self.thread = threading.Thread(target=self.runDisplayUpdate)
         self.thread.start()
