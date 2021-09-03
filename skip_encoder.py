@@ -11,7 +11,7 @@ class SkipNStettingEncoder:
         self.mode = 'SKIP'
 
         GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(button, GPIO.FALLING, callback=p.togglePaused)
+        GPIO.add_event_detect(button, GPIO.FALLING, callback=player.togglePaused)
 
     def handleSkip(self, direction):
         now = time.time()
