@@ -3,7 +3,7 @@ import time
 import RPi.GPIO as GPIO
 
 class SkipNStettingEncoder:
-    def __init__(self, leftPin, rightPin, button, player):
+    def __init__(self, leftPin, rightPin, button, player, settings):
         self.last_tick = 0
         self.tick_count = 0
         self.encoder = Encoder(leftPin, rightPin, self.onChange)
@@ -19,8 +19,14 @@ class SkipNStettingEncoder:
             self.button_down_time = time.time()
         else:
             duration = time.time() - self.button_down_time
-            if duration < 1:
+            if duration < 2:
                 self.player.togglePaused()
+            else:
+                self.settings.openClose()
+                if self.mode == 'SKIP':
+                    self.mode = 'SETTINGS'
+                else:
+                    self.mode = 'SKIP'
 
 
     def handleSkip(self, direction):
@@ -41,6 +47,11 @@ class SkipNStettingEncoder:
             self.player.prev()
             print('Prev')
 
+    def handleSettings(self, direction):
+        self.settings.move(direction)
+
     def onChange(self, value, direction):
         if self.mode == 'SKIP':
             self.handleSkip(direction)
+        if self.mode == 'SETTINGS':
+            self.handleSettings(direction)
