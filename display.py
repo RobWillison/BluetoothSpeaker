@@ -45,17 +45,18 @@ class Display:
 
             frame[0] = [-1]*i + list(newState[0][i:-1])
             frame[1] = [-1]*i + list(newState[1][i:-1])
-            print(frame[0])
-            print(frame[1])
+
             frames.append(frame)
         self.displayState += frames
 
     def updateDisplay(self, displayData):
+
         self.lcd.clear()
-        for index, row in enumerate(displayData):
-            self.lcd.setCursor(0, index)
-            for index, char in enumerate(row):
-                self.lcd.setCursor(index, index)
+        for row_index, row in enumerate(displayData):
+            print(row)
+            self.lcd.setCursor(0, row_index)
+            for char_index, char in enumerate(row):
+                self.lcd.setCursor(char_index, row_index)
                 if char != -1:
                     self.lcd.write(char)
 
