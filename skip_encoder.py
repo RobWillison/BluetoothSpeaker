@@ -18,11 +18,11 @@ class SkipEncoder:
 
         print(self.tick_count)
         if self.tick_count < -10:
-            self.player.next()
             self.tick_count = 0
+            self.player.next()
             print('Next')
 
         if self.tick_count > 10:
-            self.player.prev()
             self.tick_count = 0
+            self.player.prev()
             print('Prev')
