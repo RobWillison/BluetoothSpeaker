@@ -5,7 +5,7 @@ class Settings:
     def __init__(self, display):
         self.display = display
         self.open = False
-        self.options = ['Change Colour', 'Pair Device']
+        self.options = ['Change Colour  <', 'Pair Device    <']
         self.currentPosition = 0
         self.item_selected = False
         self.colourValue = 0
