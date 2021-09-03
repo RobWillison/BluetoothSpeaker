@@ -7,7 +7,7 @@ send "\r"
 
 expect "# "
 send "agent NoInputNoOutput\r"
-expect "Agent registered"
+expect "Agent"
 send "\r"
 
 expect "# "
@@ -17,7 +17,3 @@ send "\r"
 
 expect "# "
 send "discoverable on\r"
-
-expect "Authorize "
-send "yes\r"
-send "exit\r"
