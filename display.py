@@ -86,14 +86,14 @@ class Display:
             self.displayState[0][15] = bytearray(' ', 'utf-8')[0]
         self.displayChanged = True
 
-    def writeText(self, text):
-        self.displayState[0] = text.ljust(16)
-        self.displayState[1] = ''.ljust(16)
+    def writeText(self, text, text2=''):
+        self.displayState[0] =  bytearray(text.ljust(16), 'utf-8')
+        self.displayState[1] = bytearray(text2.ljust(16), 'utf-8')
         self.displayChanged = True
 
     def writeTrackInfo(self):
         title = self.cropText(self.track).ljust(16)
         artist = self.cropText(self.artist).ljust(16)
         self.displayState[0] = bytearray(title, 'utf-8')
-        self.displayState[1] = bytearray(title, 'utf-8')
+        self.displayState[1] = bytearray(artist, 'utf-8')
         self.displayChanged = True
