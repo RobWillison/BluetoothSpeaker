@@ -38,7 +38,7 @@ class Encoder:
                 if self.direction == "L":
                     self.value = self.value - 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback(self.value, -1)
 
         elif self.state == "10": # R3 or L1
             if newState == "11": # Turned left 1
@@ -47,7 +47,7 @@ class Encoder:
                 if self.direction == "R":
                     self.value = self.value + 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback(self.value, 1)
 
         else: # self.state == "11"
             if newState == "01": # Turned left 1
@@ -58,22 +58,13 @@ class Encoder:
                 if self.direction == "L":
                     self.value = self.value - 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback(self.value, -1)
                 elif self.direction == "R":
                     self.value = self.value + 1
                     if self.callback is not None:
-                        self.callback(self.value)
+                        self.callback(self.value, 1)
 
         self.state = newState
 
     def getValue(self):
         return self.value
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(27, GPIO.OUT)
-GPIO.output(27, GPIO.HIGH)
-
-encoder = Encoder(4,22, print)
-
-while True:
-    time.sleep(1)

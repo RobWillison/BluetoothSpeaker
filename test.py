@@ -3,8 +3,13 @@ import RPi.GPIO as GPIO
 import time
 from player import Player
 from display import Display
+from encoder import Encoder
+
+def encoderMoved(current, change):
+    print(current)
 
 d = Display()
+e = Encoder(4, 22, encoderMoved)
 p = Player(d.trackChanged, d.pausedStatusChanged)
 
 GPIO.setwarnings(False)
