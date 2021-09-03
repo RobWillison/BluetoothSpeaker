@@ -69,13 +69,13 @@ class RGB1602:
   def setReg(self,reg,data):
     b.write_byte_data(RGB_ADDRESS,reg,data)
 
-  def createCustomSymbol(address, symbol):
+  def createCustomSymbol(self, address, symbol):
       self.command(LCD_SETCGRAMADDR)
       for row in symbol:
           self.write(row)
       self.command(LCD_SETDDRAMADDR)
 
-  def printCustomSymbol(address):
+  def printCustomSymbol(self, address):
      self.write(0)
 
   def setRGB(self,r,g,b):
