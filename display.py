@@ -22,28 +22,26 @@ class Display:
         self.artist = 'Unknown'
         self.album = 'Unknown'
 
-        self.displayState = [bytearray('Bluetooth       ', 'utf-8'), bytearray('Bluetooth       ', 'utf-8')]
-        self.displayLock = threading.Lock()
+        self.displayState = [[bytearray('Bluetooth       ', 'utf-8'), bytearray('Bluetooth       ', 'utf-8')]]
 
-        self.displayChanged = True
         self.thread = threading.Thread(target=self.runDisplayUpdate)
         self.thread.start()
 
     def runDisplayUpdate(self):
         while True:
-            if self.displayChanged:
-                self.displayChanged = False
-                self.updateDisplay()
-            time.sleep(0.25)
+            if len(self.displayState) > 1:
+                self.displayState.pop(0)
+                self.updateDisplay(self.displayState[0])
 
-    def updateDisplay(self):
-        self.displayLock.acquire()
+    # def runSkipAnimation(self):
+
+
+    def updateDisplay(self, displayData):
         self.lcd.clear()
-        for index, row in enumerate(self.displayState):
+        for index, row in enumerate(displayData):
             self.lcd.setCursor(0, index)
             for char in row:
                 self.lcd.write(char)
-        self.displayLock.release()
 
     def pauseSymbol(self):
         return [
@@ -83,26 +81,26 @@ class Display:
 
 
     def pausedStatusChanged(self, paused):
-        self.displayLock.acquire()
+        newState = self.displayState[-1]
         if paused:
-            self.displayState[0][15] = 0
+            newState[0][15] = 0
         else:
-            self.displayState[0][15] = bytearray(' ', 'utf-8')[0]
-        self.displayChanged = True
-        self.displayLock.release()
+            newState[0][15] = bytearray(' ', 'utf-8')[0]
+
+        self.displayState.append(newState)
 
     def writeText(self, text, text2=''):
-        self.displayLock.acquire()
-        self.displayState[0] =  bytearray(text.ljust(16), 'utf-8')
-        self.displayState[1] = bytearray(text2.ljust(16), 'utf-8')
-        self.displayChanged = True
-        self.displayLock.release()
+        newState = [[],[]]
+        newState[0] =  bytearray(text.ljust(16), 'utf-8')
+        newState[1] = bytearray(text2.ljust(16), 'utf-8')
+
+        self.displayState.append(newState)
 
     def writeTrackInfo(self):
-        self.displayLock.acquire()
+        newState = [[],[]]
         title = self.cropText(self.track).ljust(16)
         artist = self.cropText(self.artist).ljust(16)
-        self.displayState[0] = bytearray(title, 'utf-8')
-        self.displayState[1] = bytearray(artist, 'utf-8')
-        self.displayChanged = True
-        self.displayLock.release()
+        newState[0] = bytearray(title, 'utf-8')
+        newState[1] = bytearray(artist, 'utf-8')
+
+        self.displayState.append(newState)
