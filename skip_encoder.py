@@ -19,10 +19,9 @@ class SkipNStettingEncoder:
 
     def handlePress(self, pin):
         now = time.time()
+        print(now - self.last_click)
         if (now - self.last_click) < 1:
             return
-
-        self.last_click = now
 
         print('CLICKED')
 
@@ -42,6 +41,8 @@ class SkipNStettingEncoder:
                 self.mode = 'SETTINGS'
             else:
                 self.mode = 'SKIP'
+
+        self.last_click = now
 
 
     def handleSkip(self, direction):
