@@ -99,9 +99,9 @@ class Display:
     def pausedStatusChanged(self, paused):
         newState = [[],[]]
         if paused:
-            newState[0] = [-1*15, 0]
+            newState[0] = [-1]*15 + [0]
         else:
-            newState[0][15] = [-1*15, ' ']
+            newState[0][15] = [-1]*15 + [' ']
 
         self.displayState.append(newState)
 
