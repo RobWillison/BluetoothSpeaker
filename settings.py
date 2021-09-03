@@ -27,14 +27,17 @@ class Settings:
     def changeColour(self):
         self.display.writeText('Change Colour', '[=             ]')
 
+    def pair(self):
+        self.display.writeText('Pairing')
+
     def click(self):
         if self.item_selected:
             self.item_selected = False
-            self.display.writeText('Settings', self.options[0])
+            self.display.writeText('Settings', self.options[self.currentPosition])
         else:
             self.item_selected = True
             if self.currentPosition == 0:
                 self.changeColour()
             else:
-                print('PAIRING')
+                self.pair()
         print('Clicked')
