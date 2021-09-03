@@ -31,6 +31,7 @@ class SkipNStettingEncoder:
                     self.mode = 'SETTINGS'
                 else:
                     self.mode = 'SKIP'
+        time.sleep(0.5)
 
 
     def handleSkip(self, direction):
