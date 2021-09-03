@@ -3,14 +3,14 @@ import RPi.GPIO as GPIO
 import time
 from player import Player
 from display import Display
-from encoder import Encoder
+from skip_encoder import SkipEncoder
 
 def encoderMoved(current, change):
     print(change)
 
 d = Display()
-e = Encoder(4, 22, encoderMoved)
 p = Player(d.trackChanged, d.pausedStatusChanged)
+e = SkipEncoder(4, 22, p)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
