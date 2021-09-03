@@ -32,7 +32,7 @@ class Display:
             if len(self.displayState) > 0:
                 self.updateDisplay(self.displayState.pop(0))
 
-            time.sleep(0.5)
+            time.sleep(0.1)
 
     def runTrackChangeAnimation(self, newTrack, newArtist):
         newState = [[],[]]
@@ -40,7 +40,7 @@ class Display:
         newState[1] = bytearray(self.cropText(newArtist).ljust(16), 'utf-8')
 
         frames = []
-        for i in range(15, -1, -1):
+        for i in range(16, -1, -1):
             frame = [[], []]
 
             frame[0] = [-1]*i + list(newState[0][i:-1])
