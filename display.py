@@ -1,6 +1,7 @@
 import RGB1602
 import time
 import threading
+import math
 
 class Display:
     def __init__(self):
