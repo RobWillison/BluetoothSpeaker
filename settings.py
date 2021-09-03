@@ -42,7 +42,12 @@ class Settings:
         g = int((abs(math.sin(3.14*(t+60)/180)))*255);
         b = int((abs(math.sin(3.14*(t+120)/180)))*255);
         self.display.setRGB(r,g,b)
-        self.display.writeText('Change Colour', '[' + ('='*self.colourValue).ljust(14) + ']')
+
+        bar = bytearray('[              ]', 'utf-8')
+
+        bar[1..self.colourValue+1] = [1]*self.colourValue
+
+        self.display.writeData(bytearray('Change Colour', 'utf-8'), bar)
 
     def pair(self):
         self.display.writeText('Pairing')

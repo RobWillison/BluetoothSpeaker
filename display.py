@@ -78,7 +78,7 @@ class Display:
         ]
 
     def sliderBlock(self, fullness=1):
-        tmp = '1'*fullness.ljust(5)
+        tmp = ('1'*fullness).ljust(5)
         return [
             int(tmp, 2),
             int(tmp, 2),
@@ -116,6 +116,13 @@ class Display:
         newState = [[],[]]
         newState[0] =  bytearray(text.ljust(16), 'utf-8')
         newState[1] = bytearray(text2.ljust(16), 'utf-8')
+
+        self.displayState.append(newState)
+
+    def writeData(self, line1, line2):
+        newState = [[],[]]
+        newState[0] =  line1
+        newState[1] = line2
 
         self.displayState.append(newState)
 
