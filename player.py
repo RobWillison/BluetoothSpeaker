@@ -5,7 +5,10 @@ import threading
 
 class Player:
     def __init__(self):
+        self.player_iface = None
+        self.transport_prop_iface = None
         self.thread = threading.Thread(target=self.connect)
+        self.thread.start()
 
     def connect(self):
         while True:
