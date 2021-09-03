@@ -6,8 +6,9 @@ import json
 class Display:
     def __init__(self):
         self.lcd = RGB1602.RGB1602(16, 2)
-
-        setting_data = json.load('settings.json')
+        
+        with open('settings.json') as json_file:
+            setting_data = json.load(json_file)
 
         self.lcd.setRGB(setting_data['red'], setting_data['green'], setting_data['blue'])
         self.lcd.setCursor(0,0)
