@@ -35,13 +35,12 @@ class SkipNStettingEncoder:
             time.sleep(0.25)
             duration += 0.25
 
-            if duration > 2:
+            if duration == 2:
                 self.settings.openClose()
                 if self.mode == 'SKIP':
                     self.mode = 'SETTINGS'
                 else:
                     self.mode = 'SKIP'
-                break
 
         print('duration ' + str(duration))
         if duration < 2:
