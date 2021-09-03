@@ -4,15 +4,20 @@ import time
 from player import Player
 from display import Display
 from skip_encoder import SkipNStettingEncoder
-from settings import Settings
+from settings import SettingsState
+from bluetooth_player_state import BluetoothPlayerState
 
 def encoderMoved(current, change):
     print(change)
 
 d = Display()
-p = Player(d.trackChanged, d.pausedStatusChanged)
-s = Settings(d)
-e = SkipNStettingEncoder(4, 22, 17, p, s)
+p = Player()
+e = SkipNStettingEncoder(4, 22, 17)
+
+s = SettingsState(d, p, e)
+bp = BluetoothPlayerState(d, p, e)
+
+bp.ative()
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)

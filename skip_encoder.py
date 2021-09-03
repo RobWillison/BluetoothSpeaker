@@ -4,14 +4,15 @@ import RPi.GPIO as GPIO
 import threading
 
 class SkipNStettingEncoder:
-    def __init__(self, leftPin, rightPin, button, player, settings):
+    def __init__(self, leftPin, rightPin, button, longPress, shortPress, turn):
         self.last_tick = 0
         self.tick_count = 0
 
         self.last_click = 0
         self.encoder = Encoder(leftPin, rightPin, self.onChange)
-        self.player = player
-        self.settings = settings
+        self.longPress = longPress
+        self.shortPress = shortPress
+        self.turn = turn
         self.mode = 'SKIP'
 
         self.button_down_time = 0
@@ -36,47 +37,15 @@ class SkipNStettingEncoder:
             duration += 0.25
 
             if duration == 2:
-                self.settings.openClose()
-                if self.mode == 'SKIP':
-                    self.mode = 'SETTINGS'
-                else:
-                    self.mode = 'SKIP'
+                self.longPress()
 
         print('duration ' + str(duration))
         if duration < 2:
-            if self.mode == 'SKIP':
-                self.player.togglePaused()
-            if self.mode == 'SETTINGS':
-                self.settings.click()
+            self.shortPress()
 
 
         self.last_click = now
         self.buttonLock.release()
 
-
-    def handleSkip(self, direction):
-        now = time.time()
-        if now > self.last_tick + 1:
-            self.tick_count = 0
-
-        self.last_tick = now
-        self.tick_count += direction
-        print(self.tick_count)
-        if self.tick_count < -5:
-            self.tick_count = 0
-            self.player.next()
-            print('Next')
-
-        if self.tick_count > 5:
-            self.tick_count = 0
-            self.player.prev()
-            print('Prev')
-
-    def handleSettings(self, direction):
-        self.settings.move(direction)
-
     def onChange(self, value, direction):
-        if self.mode == 'SKIP':
-            self.handleSkip(direction)
-        if self.mode == 'SETTINGS':
-            self.handleSettings(direction)
+        self.turn(direction)

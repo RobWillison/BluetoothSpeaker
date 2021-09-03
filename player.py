@@ -5,14 +5,15 @@ import threading
 import time
 
 class Player:
-    def __init__(self, track_change_callback, pause_change_callback):
-        self.track_change_callback = track_change_callback
-        self.pause_change_callback = pause_change_callback
+    def __init__(self):
         self.player_iface = None
         self.transport_prop_iface = None
         self.paused = False
         self.thread = threading.Thread(target=self.connect)
         self.thread.start()
+        self.title = 'Test Track'
+        self.album = ''
+        self.artist = 'Rob'
 
     def connect(self):
         while True:
@@ -57,12 +58,13 @@ class Player:
                     self.paused = True
                 if value == 'playing':
                     self.paused = False
-                self.pause_change_callback(self.paused)
             elif prop == 'Track':
                 print('Music Info:')
                 for key in ('Title', 'Artist', 'Album'):
                     print('   {}: {}'.format(key, value.get(key, '')))
-                self.track_change_callback(value.get('Title'), value.get('Artist'), value.get('Album'))
+                self.title = value.get('Title')
+                self.artist = value.get('Artist')
+                self.album = value.get('Album')
 
     def play(self):
         self.player_iface.Play()
@@ -81,3 +83,12 @@ class Player:
 
     def prev(self):
         self.player_iface.Previous()
+
+    def title(self):
+        return self.title
+
+    def artist(self):
+        return self.artist
+
+    def album(self):
+        return self.album

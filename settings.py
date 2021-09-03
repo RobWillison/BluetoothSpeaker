@@ -1,9 +1,11 @@
 import math
 import json
 
-class Settings:
-    def __init__(self, display):
+class SettingsState:
+    def __init__(self, display, player, encoder):
         self.display = display
+        self.display = encoder
+        self.display = player
         self.open = False
         self.options = ['Change Colour  <', 'Pair Device    <']
         self.currentPosition = 0

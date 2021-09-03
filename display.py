@@ -6,7 +6,7 @@ import json
 class Display:
     def __init__(self):
         self.lcd = RGB1602.RGB1602(16, 2)
-        
+
         with open('settings.json') as json_file:
             setting_data = json.load(json_file)
 
@@ -25,10 +25,6 @@ class Display:
 
         self.lcd.printCustomSymbol(0)
         self.lcd.printCustomSymbol(1)
-
-        self.track = 'Unknown'
-        self.artist = 'Unknown'
-        self.album = 'Unknown'
 
         self.displayState = [[bytearray('Bluetooth       ', 'utf-8'), bytearray('Speaker         ', 'utf-8')]]
 
@@ -131,14 +127,5 @@ class Display:
         newState = [[],[]]
         newState[0] =  line1
         newState[1] = line2
-
-        self.displayState.append(newState)
-
-    def writeTrackInfo(self):
-        newState = [[],[]]
-        title = self.cropText(self.track).ljust(16)
-        artist = self.cropText(self.artist).ljust(16)
-        newState[0] = bytearray(title, 'utf-8')
-        newState[1] = bytearray(artist, 'utf-8')
 
         self.displayState.append(newState)
