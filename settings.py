@@ -30,6 +30,12 @@ class Settings:
 
     def changeColour(self, direction):
         self.colourValue += direction
+        
+        if self.colourValue < 0:
+            self.colourValue = 0
+        if self.colourValue > 14:
+            self.colourValue = 14
+
         self.display.writeText('Change Colour', '[' + ('='*self.colourValue).ljust(14) + ']')
 
     def pair(self):

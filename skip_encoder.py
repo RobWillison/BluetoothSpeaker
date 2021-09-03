@@ -20,14 +20,13 @@ class SkipNStettingEncoder:
         GPIO.add_event_detect(button, GPIO.RISING, callback=self.handlePress, bouncetime=500)
 
     def handlePress(self, pin):
+        print('CLICKED')
         self.buttonLock.acquire()
         now = time.time()
         print(now - self.last_click)
         if (now - self.last_click) < 1:
             self.buttonLock.release()
             return
-
-        print('CLICKED')
 
         duration = 0
         while GPIO.input(pin):
