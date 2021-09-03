@@ -83,12 +83,3 @@ class Player:
 
     def prev(self):
         self.player_iface.Previous()
-
-    def title(self):
-        return self.title
-
-    def artist(self):
-        return self.artist
-
-    def album(self):
-        return self.album

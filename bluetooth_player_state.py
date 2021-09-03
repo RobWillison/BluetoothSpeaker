@@ -10,8 +10,8 @@ class BluetoothPlayerState:
         self.displayTrackInfo()
 
     def displayTrackInfo(self):
-        title = self.player.title()
-        artist = self.player.artist()
+        title = self.player.title
+        artist = self.player.artist
 
         newState = [[],[]]
         title = self.cropText(title).ljust(16)
