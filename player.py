@@ -32,14 +32,14 @@ class Player:
                 sys.exit('Error: DBus.Properties iface not found.')
 
             bus.add_signal_receiver(
-                on_property_changed,
+                self.on_property_changed,
                 bus_name='org.bluez',
                 signal_name='PropertiesChanged',
                 dbus_interface='org.freedesktop.DBus.Properties')
 
             GLib.MainLoop().run()
 
-    def on_property_changed(interface, changed, invalidated):
+    def on_property_changed(self, interface, changed, invalidated):
         global paused
         if interface != 'org.bluez.MediaPlayer1':
             return
@@ -55,11 +55,11 @@ class Player:
                 for key in ('Title', 'Artist', 'Album'):
                     print('   {}: {}'.format(key, value.get(key, '')))
 
-    def play():
+    def play(self):
         self.player_iface.Play()
 
-    def pause():
+    def pause(self):
         self.player_iface.Pause()
 
-    def paused():
+    def paused(self):
         self.paused
