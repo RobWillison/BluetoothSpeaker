@@ -6,7 +6,9 @@ class Display:
     def __init__(self):
         self.lcd = RGB1602.RGB1602(16, 2)
 
-        self.lcd.setRGB(10, 64, 10)
+        setting_data = json.load('settings.json')
+
+        self.lcd.setRGB(setting_data['red'], setting_data['green'], setting_data['blue'])
         self.lcd.setCursor(0,0)
         self.lcd.printout('Bluetooth       ')
         self.lcd.setCursor(0,1)

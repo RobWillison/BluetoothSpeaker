@@ -53,6 +53,8 @@ class Settings:
         bar[fullSteps+1] = (self.colourValue%5) + 1
 
         self.display.writeData(bytearray('Change Colour', 'utf-8'), bar)
+        with open('settings.json', 'w') as outfile:
+            json.dump({'red': r, 'green': g, 'blue': b}, outfile)
 
     def pair(self):
         self.display.writeText('Pairing')
