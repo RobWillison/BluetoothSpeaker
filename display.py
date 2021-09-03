@@ -132,9 +132,12 @@ class Display:
 
     def writeText(self, line1, line2):
         newState = [[],[]]
-        title = self.cropText(line1).ljust(16)
-        artist = self.cropText(line2).ljust(16)
-        line1 = bytearray(title, 'utf-8')
-        line2 = bytearray(artist, 'utf-8')
+        line1 = self.cropText(line1).ljust(16)
+        line2 = self.cropText(line2).ljust(16)
+        line1 = bytearray(line1, 'utf-8')
+        line2 = bytearray(line2, 'utf-8')
+
+        newState[0] =  line1
+        newState[1] = line2
 
         self.displayState.append(newState)
