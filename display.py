@@ -10,10 +10,15 @@ class Display:
         self.lcd.setCursor(0,1)
         self.lcd.printout('By Rob')
 
+    def cropText(self, text):
+        if len(text) > 14:
+            return text[0..12] + '...'
+        return text
+
 
     def trackChanged(self, track, artist, album):
         self.lcd.clear()
         self.lcd.setCursor(0,0)
-        self.lcd.printout(track)
+        self.lcd.printout(self.cropText(track))
         self.lcd.setCursor(0,1)
-        self.lcd.printout(artist)
+        self.lcd.printout(self.cropText(artist))
