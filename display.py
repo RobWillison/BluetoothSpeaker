@@ -50,8 +50,6 @@ class Display:
         self.displayState += frames
 
     def updateDisplay(self, displayData):
-
-        self.lcd.clear()
         for row_index, row in enumerate(displayData):
             print(row)
             self.lcd.setCursor(0, row_index)
