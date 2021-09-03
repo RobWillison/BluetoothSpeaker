@@ -33,6 +33,8 @@ class Display:
                 self.displayState.pop(0)
                 self.updateDisplay(self.displayState[0])
 
+            time.sleep(0.1)
+
     # def runSkipAnimation(self):
 
 
