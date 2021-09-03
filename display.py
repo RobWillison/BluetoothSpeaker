@@ -13,7 +13,7 @@ class Display:
         self.lcd.createCustomSymbol(1, self.pauseSymbol())
 
     def pauseSymbol(self):
-        [
+        return [
             int('11111111', 2),
             int('11111111', 2),
             int('11111111', 2),
