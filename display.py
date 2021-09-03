@@ -32,7 +32,7 @@ class Display:
             if len(self.displayState) > 0:
                 self.updateDisplay(self.displayState.pop(0))
 
-            time.sleep(0.1)
+            time.sleep(0.05)
 
     def runTrackChangeAnimation(self, newTrack, newArtist):
         newState = [[],[]]
@@ -101,7 +101,7 @@ class Display:
         if paused:
             newState[0] = [-1]*15 + [0]
         else:
-            newState[0][15] = [-1]*15 + [' ']
+            newState[0] = [-1]*15 + [' ']
 
         self.displayState.append(newState)
 
