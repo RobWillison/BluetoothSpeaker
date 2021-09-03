@@ -61,5 +61,7 @@ class Display:
             self.lcd.setCursor(15, 0)
             self.lcd.printout(' ')
 
-    def clear(self):
+    def writeText(self, text):
         self.lcd.clear()
+        self.lcd.setCursor(0, 0)
+        self.lcd.printout(text)

@@ -10,8 +10,7 @@ class Settings:
             self.display.clear()
         else:
             self.open = True
-            self.display.clear()
-            self.display.printout('Settings')
+            self.display.writeText('Settings')
 
     def move(self, direction):
         return
