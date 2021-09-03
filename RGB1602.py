@@ -76,7 +76,7 @@ class RGB1602:
       self.command(LCD_SETDDRAMADDR)
 
   def printCustomSymbol(self, address):
-     self.write(0)
+     self.write(address)
 
   def setRGB(self,r,g,b):
     self.setReg(REG_RED,r)
