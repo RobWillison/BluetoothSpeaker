@@ -21,7 +21,8 @@ class SkipNStettingEncoder:
         else:
             duration = time.time() - self.button_down_time
             if duration < 2:
-                self.player.togglePaused()
+                if self.mode == 'SKIP':
+                    self.player.togglePaused()
             else:
                 self.settings.openClose()
                 if self.mode == 'SKIP':
