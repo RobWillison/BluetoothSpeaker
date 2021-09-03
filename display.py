@@ -83,7 +83,7 @@ class Display:
         if paused:
             self.displayState[0][15] = 0
         else:
-            self.displayState[0][15] = ' '
+            self.displayState[0][15] = bytearray(' ', 'utf-8')[0]
         self.displayChanged = True
 
     def writeText(self, text):
@@ -94,6 +94,6 @@ class Display:
     def writeTrackInfo(self):
         title = self.cropText(self.track).ljust(16)
         artist = self.cropText(self.artist).ljust(16)
-        self.displayState[0] = title
-        self.displayState[1] = artist
+        self.displayState[0] = bytearray(title, 'utf-8')
+        self.displayState[1] = bytearray(title, 'utf-8')
         self.displayChanged = True
