@@ -36,10 +36,8 @@ class Display:
         for index, row in enumerate(self.displayState):
             self.lcd.setCursor(0, index)
             for char in row:
-                if isinstance(char, int):
-                    self.lcd.write(char)
-                else:
-                    self.lcd.write(bytearray(char,'utf-8')[0])
+                self.lcd.write(char)
+
 
     def pauseSymbol(self):
         return [
@@ -85,13 +83,11 @@ class Display:
             self.displayState[0][15] = ' '
 
     def writeText(self, text):
-        self.lcd.clear()
-        self.lcd.setCursor(0, 0)
-        self.lcd.printout(text)
+        self.displayState[0] = text.ljust(16)
+        self.displayState[1] = ''.ljust(16)
 
     def writeTrackInfo(self):
-        self.lcd.clear()
-        self.lcd.setCursor(0,0)
-        self.lcd.printout(self.cropText(self.track))
-        self.lcd.setCursor(0,1)
-        self.lcd.printout(self.cropText(self.artist))
+        title = self.cropText(self.track).ljust(16)
+        artist = self.cropText(self.artist).ljust(16)
+        self.displayState[0] = title
+        self.displayState[1] = artist
