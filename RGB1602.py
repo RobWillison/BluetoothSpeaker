@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from smbus import SMBus
-b = SMBus(0)
+b = SMBus(1)
 
 #Device I2C Arress
 LCD_ADDRESS   =  (0x7c>>1)
