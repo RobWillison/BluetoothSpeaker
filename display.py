@@ -10,6 +10,8 @@ class Display:
         self.lcd.setCursor(0,1)
         self.lcd.printout('By Rob')
 
+        d.lcd.createCustomSymbol(1, [31, 0, 31, 0, 31, 0, 31, 0])
+
     def cropText(self, text):
         if len(text) > 14:
             return text[0:11] + '...'
@@ -22,3 +24,11 @@ class Display:
         self.lcd.printout(self.cropText(track) + u"\u23F8")
         self.lcd.setCursor(0,1)
         self.lcd.printout(self.cropText(artist))
+
+    def pausedStatusChanged(self, paused):
+        if paused:
+            self.lcd.setCursor(14, 1)
+            self.lcd.printCustomSymbol(1)
+        else:
+            self.lcd.setCursor(14, 1)
+            self.lcd.printout(' ')
