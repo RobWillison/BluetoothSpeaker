@@ -1,3 +1,4 @@
+import math
 
 class Settings:
     def __init__(self, display):
