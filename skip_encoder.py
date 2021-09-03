@@ -19,9 +19,12 @@ class SkipNStettingEncoder:
 
     def handlePress(self, pin):
         now = time.time()
-        if now - self.last_click < 1:
+        if (now - self.last_click) < 1:
             return
+
         self.last_click = now
+
+        print('CLICKED')
 
         duration = 0
         while GPIO.input(pin):
