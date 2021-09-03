@@ -7,6 +7,7 @@ class BluetoothPlayerState:
         self.encoder = encoder
 
         self.encoder.addShortPressCallback(self.togglePause)
+        self.player.addUpdateCallback(self.displayTrackInfo)
 
     def togglePause(self):
         line1 = [-1]*16

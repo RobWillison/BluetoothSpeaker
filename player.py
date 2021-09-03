@@ -14,6 +14,10 @@ class Player:
         self.title = 'Test Track'
         self.album = ''
         self.artist = 'Rob'
+        self.updateCallbacks = []
+
+    def addUpdateCallback(self, callback):
+        self.updateCallbacks.append(callback)
 
     def connect(self):
         while True:
@@ -65,6 +69,8 @@ class Player:
                 self.title = value.get('Title')
                 self.artist = value.get('Artist')
                 self.album = value.get('Album')
+
+        [callback() for callback in self.updateCallbacks]
 
     def play(self):
         self.player_iface.Play()
