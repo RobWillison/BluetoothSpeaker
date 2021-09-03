@@ -69,7 +69,7 @@ class Player:
     def pause(self):
         self.player_iface.Pause()
 
-    def togglePaused(self, _):
+    def togglePaused(self):
         if self.paused:
             self.play()
         else:
