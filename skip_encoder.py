@@ -6,6 +6,8 @@ class SkipNStettingEncoder:
     def __init__(self, leftPin, rightPin, button, player, settings):
         self.last_tick = 0
         self.tick_count = 0
+
+        self.last_click = 0
         self.encoder = Encoder(leftPin, rightPin, self.onChange)
         self.player = player
         self.settings = settings
@@ -16,6 +18,11 @@ class SkipNStettingEncoder:
         GPIO.add_event_detect(button, GPIO.RISING, callback=self.handlePress, bouncetime=500)
 
     def handlePress(self, pin):
+        now = time.time()
+        if now - self.last_click < 1:
+            return
+        self.last_click = now
+
         duration = 0
         while GPIO.input(pin):
             time.sleep(0.25)
