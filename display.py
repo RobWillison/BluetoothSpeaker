@@ -27,6 +27,9 @@ class Display:
         self.thread = threading.Thread(target=self.runDisplayUpdate)
         self.thread.start()
 
+    def setRGB(self,r,g,b):
+        self.lcd.setRGB(r,g,b)
+
     def runDisplayUpdate(self):
         while True:
             if len(self.displayState) > 0:

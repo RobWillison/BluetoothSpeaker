@@ -36,6 +36,11 @@ class Settings:
         if self.colourValue > 14:
             self.colourValue = 14
 
+        t = (180/14) * self.colourValue
+        r = int((abs(math.sin(3.14*t/180)))*255);
+        g = int((abs(math.sin(3.14*(t+60)/180)))*255);
+        b = int((abs(math.sin(3.14*(t+120)/180)))*255);
+        self.display.setRGB(r,g,b)
         self.display.writeText('Change Colour', '[' + ('='*self.colourValue).ljust(14) + ']')
 
     def pair(self):
