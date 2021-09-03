@@ -31,13 +31,14 @@ class Settings:
 
     def changeColour(self, direction):
         self.colourValue -= direction
+        steps = 14*5
 
         if self.colourValue < 0:
             self.colourValue = 0
-        if self.colourValue > 14:
-            self.colourValue = 14
+        if self.colourValue > steps:
+            self.colourValue = steps
 
-        t = (180/14) * self.colourValue
+        t = (180/steps * self.colourValue
         r = int((abs(math.sin(3.14*t/180)))*255);
         g = int((abs(math.sin(3.14*(t+60)/180)))*255);
         b = int((abs(math.sin(3.14*(t+120)/180)))*255);
@@ -45,7 +46,11 @@ class Settings:
 
         bar = bytearray('[              ]', 'utf-8')
 
-        bar[1:self.colourValue+1] = [5]*self.colourValue
+        fullSteps = math.floor(self.colourValue/5)
+        bar[1:fullSteps+1] = [5]*fullSteps
+        bar[1:fullSteps+1] = [5]*fullSteps
+
+        bar[fullSteps+1] = (self.colourValue%5) + 1
 
         self.display.writeData(bytearray('Change Colour', 'utf-8'), bar)
 
