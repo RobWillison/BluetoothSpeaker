@@ -10,7 +10,7 @@ class Display:
         self.lcd.setCursor(0,1)
         self.lcd.printout('By Rob')
 
-        d.lcd.createCustomSymbol(1, [31, 0, 31, 0, 31, 0, 31, 0])
+        self.lcd.createCustomSymbol(1, [31, 0, 31, 0, 31, 0, 31, 0])
 
     def cropText(self, text):
         if len(text) > 14:
