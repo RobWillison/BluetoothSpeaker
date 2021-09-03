@@ -16,8 +16,11 @@ class SkipEncoder:
         self.last_tick = now
         self.tick_count += direction
 
+        print(self.tick_count)
         if self.tick_count < -10:
             self.player.next()
+            print('Next')
 
         if self.tick_count > 10:
             self.player.prev()
+            print('Prev')
