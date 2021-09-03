@@ -6,6 +6,7 @@ class Settings:
         self.options = ['Change Colour', 'Pair Device']
         self.currentPosition = 0
         self.item_selected = False
+        self.colourValue = 0
 
     def openClose(self):
         if self.open:
@@ -16,16 +17,20 @@ class Settings:
             self.display.writeText('Settings', self.options[0])
 
     def move(self, direction):
-        self.currentPosition -= direction
-        if self.currentPosition > 1:
-            self.currentPosition = 1
-        if self.currentPosition < 0:
-            self.currentPosition = 0
+        if self.item_selected:
+            self.colourValue(direction)
+        else:
+            self.currentPosition -= direction
+            if self.currentPosition > 1:
+                self.currentPosition = 1
+            if self.currentPosition < 0:
+                self.currentPosition = 0
 
-        self.display.writeText('Settings', self.options[self.currentPosition])
+            self.display.writeText('Settings', self.options[self.currentPosition])
 
-    def changeColour(self):
-        self.display.writeText('Change Colour', '[=             ]')
+    def changeColour(self, direction):
+        self.colourValue += direction
+        self.display.writeText('Change Colour', '[' + '='*self.colourValue.ljust(14) + ']')
 
     def pair(self):
         self.display.writeText('Pairing')
@@ -37,7 +42,7 @@ class Settings:
         else:
             self.item_selected = True
             if self.currentPosition == 0:
-                self.changeColour()
+                self.changeColour(0)
             else:
                 self.pair()
         print('Clicked')
