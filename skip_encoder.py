@@ -13,19 +13,16 @@ class SkipNStettingEncoder:
 
         self.button_down_time = 0
         GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(button, GPIO.BOTH, callback=self.handlePress)
+        GPIO.add_event_detect(button, GPIO.RISING, callback=self.handlePress, bouncetime=200)
 
     def handlePress(self, pin):
-        print('Pressed')
-        if GPIO.input(pin):
-            self.button_down_time = time.time()
-        else:
-            duration = time.time() - self.button_down_time
+        duration = 0
+        while GPIO.input(pin):
             if duration < 2:
                 if self.mode == 'SKIP':
                     self.player.togglePaused()
                 if self.mode == 'SETTINGS':
-                    self.settings.click()
+                    self.sett.togglePaused()
             else:
                 self.settings.openClose()
                 if self.mode == 'SKIP':
@@ -33,6 +30,8 @@ class SkipNStettingEncoder:
                 else:
                     self.mode = 'SKIP'
 
+            time.sleep(0.25)
+            duration += 0.25
 
 
     def handleSkip(self, direction):
