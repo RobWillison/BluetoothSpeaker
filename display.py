@@ -23,6 +23,8 @@ class Display:
         self.album = 'Unknown'
 
         self.displayState = [bytearray('Bluetooth       ', 'utf-8'), bytearray('Bluetooth       ', 'utf-8')]
+        self.displayLock = threading.Lock()
+
         self.displayChanged = True
         self.thread = threading.Thread(target=self.runDisplayUpdate)
         self.thread.start()
@@ -35,12 +37,13 @@ class Display:
             time.sleep(0.25)
 
     def updateDisplay(self):
+        self.displayLock.acquire()
         self.lcd.clear()
         for index, row in enumerate(self.displayState):
             self.lcd.setCursor(0, index)
             for char in row:
                 self.lcd.write(char)
-
+        self.displayLock.release()
 
     def pauseSymbol(self):
         return [
@@ -80,20 +83,26 @@ class Display:
 
 
     def pausedStatusChanged(self, paused):
+        self.displayLock.acquire()
         if paused:
             self.displayState[0][15] = 0
         else:
             self.displayState[0][15] = bytearray(' ', 'utf-8')[0]
         self.displayChanged = True
+        self.displayLock.release()
 
     def writeText(self, text, text2=''):
+        self.displayLock.acquire()
         self.displayState[0] =  bytearray(text.ljust(16), 'utf-8')
         self.displayState[1] = bytearray(text2.ljust(16), 'utf-8')
         self.displayChanged = True
+        self.displayLock.release()
 
     def writeTrackInfo(self):
+        self.displayLock.acquire()
         title = self.cropText(self.track).ljust(16)
         artist = self.cropText(self.artist).ljust(16)
         self.displayState[0] = bytearray(title, 'utf-8')
         self.displayState[1] = bytearray(artist, 'utf-8')
         self.displayChanged = True
+        self.displayLock.release()
