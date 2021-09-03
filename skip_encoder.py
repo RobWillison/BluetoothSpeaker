@@ -1,6 +1,7 @@
 from encoder import Encoder
 import time
 import RPi.GPIO as GPIO
+import threading
 
 class SkipNStettingEncoder:
     def __init__(self, leftPin, rightPin, button, player, settings):
