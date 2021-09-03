@@ -23,12 +23,15 @@ class Display:
         self.album = 'Unknown'
 
         self.displayState = [['=' for i in range(16)], ['=' for i in range(16)]]
+        self.displayChanged = True
         self.thread = threading.Thread(target=self.runDisplayUpdate)
         self.thread.start()
 
     def runDisplayUpdate(self):
         while True:
-            self.updateDisplay()
+            if self.displayChanged:
+                self.displayChanged = False
+                self.updateDisplay()
             time.sleep(0.25)
 
     def updateDisplay(self):
@@ -81,13 +84,16 @@ class Display:
             self.displayState[0][15] = 0
         else:
             self.displayState[0][15] = ' '
+        self.displayChanged = True
 
     def writeText(self, text):
         self.displayState[0] = text.ljust(16)
         self.displayState[1] = ''.ljust(16)
+        self.displayChanged = True
 
     def writeTrackInfo(self):
         title = self.cropText(self.track).ljust(16)
         artist = self.cropText(self.artist).ljust(16)
         self.displayState[0] = title
         self.displayState[1] = artist
+        self.displayChanged = True
