@@ -74,3 +74,9 @@ class Player:
             self.play()
         else:
             self.pause()
+
+    def next(self):
+        self.player_iface.Next()
+
+    def prev(self):
+        self.player_iface.Previous()
