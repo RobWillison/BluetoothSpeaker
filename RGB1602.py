@@ -70,7 +70,7 @@ class RGB1602:
     b.write_byte_data(RGB_ADDRESS,reg,data)
 
   def createCustomSymbol(self, address, symbol):
-      self.command(LCD_SETCGRAMADDR)
+      self.command(LCD_SETCGRAMADDR | (address<<3))
       for row in symbol:
           self.write(row)
       self.command(LCD_SETDDRAMADDR)

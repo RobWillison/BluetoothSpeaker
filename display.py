@@ -10,7 +10,11 @@ class Display:
         self.lcd.setCursor(0,1)
         self.lcd.printout('By Rob')
 
-        self.lcd.createCustomSymbol(1, self.pauseSymbol())
+        self.lcd.createCustomSymbol(0, self.pauseSymbol())
+        self.lcd.createCustomSymbol(1, self.arrowSymbol())
+
+        self.lcd.printCustomSymbol(0)
+        self.lcd.printCustomSymbol(1)
 
     def pauseSymbol(self):
         return [
@@ -22,6 +26,18 @@ class Display:
             int('11011', 2),
             int('11011', 2),
             int('11011', 2)
+        ]
+
+    def arrowSymbol(self):
+        return [
+            int('10000', 2),
+            int('11000', 2),
+            int('01100', 2),
+            int('00110', 2),
+            int('00110', 2),
+            int('01100', 2),
+            int('11000', 2),
+            int('10000', 2)
         ]
 
     def cropText(self, text):
@@ -40,7 +56,7 @@ class Display:
     def pausedStatusChanged(self, paused):
         if paused:
             self.lcd.setCursor(15, 0)
-            self.lcd.printCustomSymbol(1)
+            self.lcd.printCustomSymbol(0)
         else:
             self.lcd.setCursor(15, 0)
             self.lcd.printout(' ')
