@@ -1,4 +1,5 @@
 import RGB1602
+import time
 
 class Display:
     def __init__(self):
@@ -19,6 +20,22 @@ class Display:
         self.track = 'Unknown'
         self.artist = 'Unknown'
         self.album = 'Unknown'
+
+        self.displayState = [['=' for i in range(16)], ['=' for i in range(16)]]
+        self.thread = threading.Thread(target=self.runDisplayUpdate)
+        self.thread.start()
+
+    def runDisplayUpdate(self):
+        while True:
+            self.updateDisplay()
+            time.sleep(0.25)
+
+    def updateDisplay(self):
+        self.lcd.clear()
+        for index, row in enumerate(self.displayState):
+            self.lcd.setCursor(0, index)
+            for char in row:
+                self.lcd.write(char)
 
     def pauseSymbol(self):
         return [
@@ -59,11 +76,9 @@ class Display:
 
     def pausedStatusChanged(self, paused):
         if paused:
-            self.lcd.setCursor(15, 0)
-            self.lcd.printCustomSymbol(0)
+            self.displayState[0][15] = 0
         else:
-            self.lcd.setCursor(15, 0)
-            self.lcd.printout(' ')
+            self.displayState[0][15] = ' '
 
     def writeText(self, text):
         self.lcd.clear()
