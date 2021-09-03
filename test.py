@@ -8,7 +8,7 @@ d = Display()
 # p = Player(d.trackChanged)
 
 d.lcd.setCursor(0,0)
-d.lcd.createCustomSymbol(1, [b'11111', b'00000', b'11111', b'00000', b'11111', b'00000', b'11111', b'00000'])
+d.lcd.createCustomSymbol(1, [31, 0, 31, 0, 31, 0, 31, 0])
 d.lcd.printCustomSymbol(1)
 #
 # GPIO.setwarnings(False)
