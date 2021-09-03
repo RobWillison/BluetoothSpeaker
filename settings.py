@@ -18,7 +18,7 @@ class Settings:
 
     def move(self, direction):
         if self.item_selected:
-            self.colourValue(direction)
+            self.changeColour(direction)
         else:
             self.currentPosition -= direction
             if self.currentPosition > 1:
