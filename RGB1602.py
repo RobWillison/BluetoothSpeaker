@@ -85,6 +85,7 @@ class RGB1602:
   def clear(self):
     self.command(LCD_CLEARDISPLAY)
     time.sleep(0.002)
+    
   def printout(self,arg):
     if(isinstance(arg,int)):
       arg=str(arg)

@@ -19,6 +19,6 @@ class Display:
     def trackChanged(self, track, artist, album):
         self.lcd.clear()
         self.lcd.setCursor(0,0)
-        self.lcd.printout(self.cropText(track))
+        self.lcd.printout(self.cropText(track) + u"\u23F8")
         self.lcd.setCursor(0,1)
         self.lcd.printout(self.cropText(artist))
