@@ -38,7 +38,7 @@ class SkipNStettingEncoder:
 
         self.last_tick = now
         self.tick_count += direction
-
+        print(self.tick_count)
         if self.tick_count < -10:
             self.tick_count = 0
             self.player.next()
