@@ -47,6 +47,6 @@ class BluetoothPlayerState:
         if self.tick_count > 5:
             self.player.next()
             self.tick_count = 0
-        if self.tick_count > -5:
+        if self.tick_count < -5:
             self.player.prev()
             self.tick_count = 0
