@@ -6,6 +6,19 @@ class BluetoothPlayerState:
         self.player = player
         self.encoder = encoder
 
+        self.encoder.addShortPressCallback(self.togglePause)
+
+    def togglePause(self):
+        line1 = [-1]*16
+        line2 = [-1]*16
+
+        if self.player.paused:
+            line1[15] = 32
+        else:
+            line1[15] = 0
+
+        self.display.writeData(line1, line2)
+
     def activate(self):
         self.displayTrackInfo()
 
