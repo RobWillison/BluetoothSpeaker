@@ -7,7 +7,11 @@ class BluetoothPlayerState:
         self.encoder = encoder
 
         self.encoder.addShortPressCallback(self.togglePause)
+        self.encoder.addTurnCallback(self.onEncoderTick)
         self.player.addUpdateCallback(self.displayTrackInfo)
+
+        self.last_tick = 0
+        self.tick_count = 0
 
     def togglePause(self):
         line1 = [-1]*16
@@ -29,3 +33,13 @@ class BluetoothPlayerState:
         artist = self.player.artist
 
         self.display.writeText(title, artist)
+
+    def onEncoderTick(self, direction):
+        now = time.time()
+        if now - self.last_tick > 1:
+            self.tick_count = 0
+
+        self.last_tick = now
+        self.tick_count += direction
+
+        print(self.tick_count)
