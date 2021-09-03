@@ -5,7 +5,8 @@ import threading
 import time
 
 class Player:
-    def __init__(self):
+    def __init__(self, track_change_callback):
+        self.track_change_callback = track_change_callback
         self.player_iface = None
         self.transport_prop_iface = None
         self.paused = False
@@ -58,6 +59,7 @@ class Player:
                 print('Music Info:')
                 for key in ('Title', 'Artist', 'Album'):
                     print('   {}: {}'.format(key, value.get(key, '')))
+                self.track_change_callback(value.get('Title'), value.get('Artist'), value.get('Album'))
 
     def play(self):
         self.player_iface.Play()

@@ -4,8 +4,6 @@ import RPi.GPIO as GPIO
 import time
 from player import Player
 
-p = Player()
-
 lcd = RGB1602.RGB1602(16, 2)
 
 lcd.setRGB(10, 64, 10)
@@ -13,6 +11,15 @@ lcd.setCursor(0,0)
 lcd.printout('Bluetooth Speaker')
 lcd.setCursor(0,1)
 lcd.printout('By Rob')
+
+def trackChanged(track, artist, album):
+    lcd.clear()
+    lcd.setCursor(0,0)
+    lcd.printout(track)
+    lcd.setCursor(0,1)
+    lcd.printout(artist)
+
+p = Player(trackChanged)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
