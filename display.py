@@ -97,7 +97,7 @@ class Display:
 
 
     def pausedStatusChanged(self, paused):
-        newState = self.displayState[-1]
+        newState = [[],[]]
         if paused:
             newState[0] = [-1*15, 0]
         else:
