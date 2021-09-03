@@ -16,6 +16,10 @@ class Display:
         self.lcd.printCustomSymbol(0)
         self.lcd.printCustomSymbol(1)
 
+        self.track = 'Unknown'
+        self.artist = 'Unknown'
+        self.album = 'Unknown'
+
     def pauseSymbol(self):
         return [
             int('11011', 2),
@@ -47,11 +51,11 @@ class Display:
 
 
     def trackChanged(self, track, artist, album):
-        self.lcd.clear()
-        self.lcd.setCursor(0,0)
-        self.lcd.printout(self.cropText(track))
-        self.lcd.setCursor(0,1)
-        self.lcd.printout(self.cropText(artist))
+        self.track = track
+        self.artist = artist
+        self.album = album
+        self.writeTrackInfo()
+
 
     def pausedStatusChanged(self, paused):
         if paused:
@@ -65,3 +69,10 @@ class Display:
         self.lcd.clear()
         self.lcd.setCursor(0, 0)
         self.lcd.printout(text)
+
+    def writeTrackInfo(self):
+        self.lcd.clear()
+        self.lcd.setCursor(0,0)
+        self.lcd.printout(self.cropText(self.track))
+        self.lcd.setCursor(0,1)
+        self.lcd.printout(self.cropText(self.artist))

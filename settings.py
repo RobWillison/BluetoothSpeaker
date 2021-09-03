@@ -7,7 +7,7 @@ class Settings:
     def openClose(self):
         if self.open:
             self.open = False
-            self.display.clear()
+            self.display.writeTrackInfo()
         else:
             self.open = True
             self.display.writeText('Settings')
