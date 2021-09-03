@@ -70,7 +70,7 @@ class Player:
                 self.artist = value.get('Artist')
                 self.album = value.get('Album')
 
-        [callback() for callback in self.updateCallbacks]
+                [callback() for callback in self.updateCallbacks]
 
     def play(self):
         self.player_iface.Play()
