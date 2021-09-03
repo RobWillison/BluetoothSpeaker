@@ -10,7 +10,19 @@ class Display:
         self.lcd.setCursor(0,1)
         self.lcd.printout('By Rob')
 
-        self.lcd.createCustomSymbol(1, [31, 0, 31, 0, 31, 0, 31, 0])
+        self.lcd.createCustomSymbol(1, self.pauseSymbol())
+
+    def pauseSymbol(self):
+        [
+            int('11111111', 2),
+            int('11111111', 2),
+            int('11111111', 2),
+            int('11111111', 2),
+            int('11111111', 2),
+            int('11111111', 2),
+            int('11111111', 2),
+            int('11111111', 2)
+        ]
 
     def cropText(self, text):
         if len(text) > 14:
