@@ -23,3 +23,6 @@ GPIO.output(27, GPIO.HIGH)
 pausePlayButton = 17
 GPIO.setup(pausePlayButton, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.add_event_detect(pausePlayButton, GPIO.FALLING, callback=p.togglePaused)
+
+while True:
+    time.sleep(1)
