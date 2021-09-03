@@ -25,7 +25,7 @@ class SkipNStettingEncoder:
             if self.mode == 'SKIP':
                 self.player.togglePaused()
             if self.mode == 'SETTINGS':
-                self.sett.togglePaused()
+                self.settings.click()
         else:
             self.settings.openClose()
             if self.mode == 'SKIP':
@@ -42,12 +42,12 @@ class SkipNStettingEncoder:
         self.last_tick = now
         self.tick_count += direction
         print(self.tick_count)
-        if self.tick_count < -10:
+        if self.tick_count < -5:
             self.tick_count = 0
             self.player.next()
             print('Next')
 
-        if self.tick_count > 10:
+        if self.tick_count > 5:
             self.tick_count = 0
             self.player.prev()
             print('Prev')
