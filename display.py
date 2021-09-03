@@ -37,11 +37,11 @@ class Display:
 
     def runTrackChangeAnimation(self, newTrack, newArtist):
         newState = [[],[]]
-        newState[0] = bytearray(newTrack.ljust(16), 'utf-8')
-        newState[1] = bytearray(newArtist.ljust(16), 'utf-8')
+        newState[0] = bytearray(self.cropText(newTrack).ljust(16), 'utf-8')
+        newState[1] = bytearray(self.cropText(newArtist).ljust(16), 'utf-8')
 
         frames = []
-        for i in range(16, 0, -1):
+        for i in range(16, -1, -1):
             frame = [[], []]
 
             frame[0] = self.displayState[0][0][0:i] + newState[0][i:-1]
