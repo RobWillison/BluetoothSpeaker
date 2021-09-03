@@ -50,14 +50,17 @@ class Display:
         self.displayState += frames
 
     def updateDisplay(self, displayData):
-        for row_index, row in enumerate(displayData):
-            print(row)
-            self.lcd.setCursor(0, row_index)
-            for char_index, char in enumerate(row):
-                if char != -1:
-                    self.lcd.write(char)
-                else:
-                    self.lcd.setCursor(char_index+1, row_index)
+        try:
+            for row_index, row in enumerate(displayData):
+                print(row)
+                self.lcd.setCursor(0, row_index)
+                for char_index, char in enumerate(row):
+                    if char != -1:
+                        self.lcd.write(char)
+                    else:
+                        self.lcd.setCursor(char_index+1, row_index)
+        except OSError:
+            self.updateDisplay(displayData)
 
     def pauseSymbol(self):
         return [
