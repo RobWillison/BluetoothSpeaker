@@ -2,6 +2,7 @@ import dbus, dbus.mainloop.glib, sys
 from gi.repository import GLib
 import busio
 import threading
+import time
 
 class Player:
     def __init__(self):
