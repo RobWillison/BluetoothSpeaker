@@ -33,4 +33,4 @@ class SkipNStettingEncoder:
 
     def onChange(self, value, direction):
         if self.mode == 'SKIP':
-            handleSkip(direction)
+            self.handleSkip(direction)
