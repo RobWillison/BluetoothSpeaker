@@ -14,10 +14,12 @@ class SkipNStettingEncoder:
         self.mode = 'SKIP'
 
         self.button_down_time = 0
+        self.buttonLock = threading.Lock()
         GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.add_event_detect(button, GPIO.RISING, callback=self.handlePress, bouncetime=500)
 
     def handlePress(self, pin):
+        self.buttonLock.aquire()
         now = time.time()
         print(now - self.last_click)
         if (now - self.last_click) < 1:
@@ -43,6 +45,7 @@ class SkipNStettingEncoder:
                 self.mode = 'SKIP'
 
         self.last_click = now
+        self.buttonLock.release()
 
 
     def handleSkip(self, direction):
