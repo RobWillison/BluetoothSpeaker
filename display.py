@@ -43,8 +43,8 @@ class Display:
         for i in range(15, 0, -1):
             frame = [[], []]
 
-            frame[0] = [-1]*i + newState[0][i:-1]
-            frame[1] = [-1]*i + newState[1][i:-1]
+            frame[0] = [-1]*i + list(newState[0][i:-1])
+            frame[1] = [-1]*i + list(newState[1][i:-1])
             print(frame[0])
             print(frame[1])
             frames.append(frame)
