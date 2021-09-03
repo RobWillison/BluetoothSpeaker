@@ -1,4 +1,5 @@
 from encoder import Encoder
+import time
 
 class SkipEncoder:
     def __init__(self, leftPin, rightPin, player):
@@ -7,4 +8,11 @@ class SkipEncoder:
         self.encoder = Encoder(leftPin, rightPin, self.onChange)
 
     def onChange(self, value, direction):
-        print(value)
+        now = time.time()
+        if now > self.last_tick + 1:
+            self.tick_count = 0
+
+        self.last_tick = now
+        self.tick_count += direction
+
+        print(self.tick_count)
