@@ -60,3 +60,6 @@ class Display:
         else:
             self.lcd.setCursor(15, 0)
             self.lcd.printout(' ')
+
+    def clear(self):
+        self.lcd.clear()
