@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from smbus import SMBus
-b = SMBus(1)
+b = SMBus(0)
 
 #Device I2C Arress
 LCD_ADDRESS   =  (0x7c>>1)
@@ -59,13 +59,13 @@ class RGB1602:
     self._showfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
     self.begin(self._row,self._col)
 
-        
+
   def command(self,cmd):
     b.write_byte_data(LCD_ADDRESS,0x80,cmd)
 
   def write(self,data):
     b.write_byte_data(LCD_ADDRESS,0x40,data)
-    
+
   def setReg(self,reg,data):
     b.write_byte_data(RGB_ADDRESS,reg,data)
 
@@ -94,20 +94,20 @@ class RGB1602:
 
 
   def display(self):
-    self._showcontrol |= LCD_DISPLAYON 
+    self._showcontrol |= LCD_DISPLAYON
     self.command(LCD_DISPLAYCONTROL | self._showcontrol)
 
- 
+
   def begin(self,cols,lines):
     if (lines > 1):
-        self._showfunction |= LCD_2LINE 
-     
-    self._numlines = lines 
-    self._currline = 0 
-     
+        self._showfunction |= LCD_2LINE
+
+    self._numlines = lines
+    self._currline = 0
+
     time.sleep(0.05)
 
-    
+
     # Send function set command sequence
     self.command(LCD_FUNCTIONSET | self._showfunction)
     #delayMicroseconds(4500);  # wait more than 4.1ms
@@ -121,12 +121,12 @@ class RGB1602:
     # finally, set # lines, font size, etc.
     self.command(LCD_FUNCTIONSET | self._showfunction)
     # turn the display on with no cursor or blinking default
-    self._showcontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF 
+    self._showcontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF
     self.display()
     # clear it off
     self.clear()
     # Initialize to default text direction (for romance languages)
-    self._showmode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT 
+    self._showmode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT
     # set the entry mode
     self.command(LCD_ENTRYMODESET | self._showmode);
 
@@ -137,9 +137,9 @@ class RGB1602:
     # set MODE2 values
     # 0010 0000 -> 0x20  (DMBLNK to 1, ie blinky mode)
     self.setReg(REG_MODE2, 0x20)
-    
 
-    
+
+
     self.setColorWhite()
 
   def setColorWhite(self):
