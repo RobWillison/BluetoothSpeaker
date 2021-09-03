@@ -29,9 +29,8 @@ class Display:
 
     def runDisplayUpdate(self):
         while True:
-            if len(self.displayState) > 1:
-                self.displayState.pop(0)
-                self.updateDisplay(self.displayState[0])
+            if len(self.displayState) > 0:
+                self.updateDisplay(self.displayState.pop(0))
 
             time.sleep(0.5)
 
