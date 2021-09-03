@@ -8,6 +8,7 @@ class Player:
     def __init__(self):
         self.player_iface = None
         self.transport_prop_iface = None
+        self.paused = False
         self.thread = threading.Thread(target=self.connect)
         self.thread.start()
 
@@ -44,7 +45,6 @@ class Player:
             GLib.MainLoop().run()
 
     def on_property_changed(self, interface, changed, invalidated):
-        global paused
         if interface != 'org.bluez.MediaPlayer1':
             return
         for prop, value in changed.items():
