@@ -33,6 +33,7 @@ class SkipNStettingEncoder:
             time.sleep(0.25)
             duration += 0.25
 
+        print('duration ' + str(duration))
         if duration < 2:
             if self.mode == 'SKIP':
                 self.player.togglePaused()
