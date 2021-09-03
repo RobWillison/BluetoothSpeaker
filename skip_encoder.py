@@ -23,6 +23,8 @@ class SkipNStettingEncoder:
             if duration < 2:
                 if self.mode == 'SKIP':
                     self.player.togglePaused()
+                if self.mode == 'SETTINGS':
+                    self.settings.click()
             else:
                 self.settings.openClose()
                 if self.mode == 'SKIP':

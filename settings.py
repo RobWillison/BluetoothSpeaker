@@ -15,10 +15,13 @@ class Settings:
             self.display.writeText('Settings', self.options[0])
 
     def move(self, direction):
-        self.currentPosition += direction
+        self.currentPosition -= direction
         if self.currentPosition > 1:
             self.currentPosition = 1
         if self.currentPosition < 0:
             self.currentPosition = 0
 
         self.display.writeText('Settings', self.options[self.currentPosition])
+
+    def click(self):
+        print('Clicked')
