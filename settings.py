@@ -45,7 +45,7 @@ class Settings:
 
         bar = bytearray('[              ]', 'utf-8')
 
-        bar[1:self.colourValue+1] = [1]*self.colourValue
+        bar[1:self.colourValue+1] = [5]*self.colourValue
 
         self.display.writeData(bytearray('Change Colour', 'utf-8'), bar)
 

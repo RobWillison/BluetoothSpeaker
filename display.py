@@ -13,7 +13,11 @@ class Display:
         self.lcd.printout('Speaker         ')
 
         self.lcd.createCustomSymbol(0, self.pauseSymbol())
-        self.lcd.createCustomSymbol(1, self.sliderBlock(3))
+        self.lcd.createCustomSymbol(1, self.sliderBlock(1))
+        self.lcd.createCustomSymbol(2, self.sliderBlock(2))
+        self.lcd.createCustomSymbol(3, self.sliderBlock(3))
+        self.lcd.createCustomSymbol(4, self.sliderBlock(4))
+        self.lcd.createCustomSymbol(5, self.sliderBlock(5))
 
         self.lcd.printCustomSymbol(0)
         self.lcd.printCustomSymbol(1)
@@ -78,7 +82,7 @@ class Display:
         ]
 
     def sliderBlock(self, fullness=1):
-        tmp = ('1'*fullness).ljust(5)
+        tmp = ('1'*fullness).ljust(5, '0')
         return [
             int(tmp, 2),
             int(tmp, 2),
