@@ -10,13 +10,12 @@ class SkipNStettingEncoder:
         self.player = player
         self.mode = 'SKIP'
 
-        self.button = button
         self.button_down_time = 0
         GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.add_event_detect(button, GPIO.BOTH, callback=self.handlePress)
 
-    def handlePress(self):
-        if GPIO.input(button):
+    def handlePress(self, pin):
+        if GPIO.input(pin):
             self.button_down_time = time.time()
         else:
             print('Button down for' + str(time.time() - self.button_down_time))
