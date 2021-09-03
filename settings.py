@@ -30,7 +30,7 @@ class Settings:
             self.display.writeText('Settings', self.options[self.currentPosition])
 
     def changeColour(self, direction):
-        self.colourValue += direction
+        self.colourValue -= direction
 
         if self.colourValue < 0:
             self.colourValue = 0

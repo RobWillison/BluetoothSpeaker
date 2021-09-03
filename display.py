@@ -13,7 +13,7 @@ class Display:
         self.lcd.printout('Speaker         ')
 
         self.lcd.createCustomSymbol(0, self.pauseSymbol())
-        self.lcd.createCustomSymbol(1, self.arrowSymbol())
+        self.lcd.createCustomSymbol(1, self.sliderBlock(3))
 
         self.lcd.printCustomSymbol(0)
         self.lcd.printCustomSymbol(1)
@@ -77,16 +77,17 @@ class Display:
             int('11011', 2)
         ]
 
-    def arrowSymbol(self):
+    def sliderBlock(self, fullness=1):
+        tmp = '1'*fullness.ljust(5)
         return [
-            int('10000', 2),
-            int('11000', 2),
-            int('01100', 2),
-            int('00110', 2),
-            int('00110', 2),
-            int('01100', 2),
-            int('11000', 2),
-            int('10000', 2)
+            int(tmp, 2),
+            int(tmp, 2),
+            int(tmp, 2),
+            int(tmp, 2),
+            int(tmp, 2),
+            int(tmp, 2),
+            int(tmp, 2),
+            int(tmp, 2)
         ]
 
     def cropText(self, text):
