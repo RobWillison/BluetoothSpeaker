@@ -18,20 +18,20 @@ class SkipNStettingEncoder:
     def handlePress(self, pin):
         duration = 0
         while GPIO.input(pin):
-            if duration < 2:
-                if self.mode == 'SKIP':
-                    self.player.togglePaused()
-                if self.mode == 'SETTINGS':
-                    self.sett.togglePaused()
-            else:
-                self.settings.openClose()
-                if self.mode == 'SKIP':
-                    self.mode = 'SETTINGS'
-                else:
-                    self.mode = 'SKIP'
-
             time.sleep(0.25)
             duration += 0.25
+
+        if duration < 2:
+            if self.mode == 'SKIP':
+                self.player.togglePaused()
+            if self.mode == 'SETTINGS':
+                self.sett.togglePaused()
+        else:
+            self.settings.openClose()
+            if self.mode == 'SKIP':
+                self.mode = 'SETTINGS'
+            else:
+                self.mode = 'SKIP'
 
 
     def handleSkip(self, direction):
