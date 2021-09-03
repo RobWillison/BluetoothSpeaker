@@ -8,6 +8,7 @@ class SkipNStettingEncoder:
         self.tick_count = 0
         self.encoder = Encoder(leftPin, rightPin, self.onChange)
         self.player = player
+        self.settings = settings
         self.mode = 'SKIP'
 
         self.button_down_time = 0
