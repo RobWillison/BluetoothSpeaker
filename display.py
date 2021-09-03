@@ -101,7 +101,7 @@ class Display:
         if paused:
             newState[0] = [-1]*15 + [0]
         else:
-            newState[0] = [-1]*15 + [' ']
+            newState[0] = [-1]*15 + [32]
 
         self.displayState.append(newState)
 
