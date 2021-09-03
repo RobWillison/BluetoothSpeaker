@@ -69,6 +69,14 @@ class RGB1602:
   def setReg(self,reg,data):
     b.write_byte_data(RGB_ADDRESS,reg,data)
 
+  def createCustomSymbol(address, symbol):
+      self.command(LCD_SETCGRAMADDR)
+      for row in symbol:
+          self.write(row)
+      self.command(LCD_SETDDRAMADDR)
+
+  def printCustomSymbol(address):
+     self.write(0)
 
   def setRGB(self,r,g,b):
     self.setReg(REG_RED,r)
@@ -85,7 +93,7 @@ class RGB1602:
   def clear(self):
     self.command(LCD_CLEARDISPLAY)
     time.sleep(0.002)
-    
+
   def printout(self,arg):
     if(isinstance(arg,int)):
       arg=str(arg)
