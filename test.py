@@ -6,7 +6,7 @@ from display import Display
 from encoder import Encoder
 
 def encoderMoved(current, change):
-    print(current)
+    print(change)
 
 d = Display()
 e = Encoder(4, 22, encoderMoved)
