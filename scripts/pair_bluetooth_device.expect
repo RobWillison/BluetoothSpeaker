@@ -17,3 +17,5 @@ send "discoverable on\r"
 
 expect "# "
 send "pairable on\r"
+
+expect "Device "
