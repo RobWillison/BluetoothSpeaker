@@ -8,7 +8,7 @@ class SettingsState:
         self.encoder = encoder
         self.player = player
         self.active = False
-        self.options = ['Change Colour  <', 'Pair Device    <']
+        self.options = ['Change Colour  <', 'Pair Device    <', 'Connect Wifi   <']
         self.currentPosition = 0
         self.item_selected = False
         self.colourValue = 0
@@ -68,6 +68,13 @@ class SettingsState:
     def pair(self):
         self.display.writeText('Pairing', 'Waiting to pair')
         output = subprocess.call(["/bin/bash","scripts/pair_and_trust.sh", ">>", "bluetoothSpeaker.log"])
+        self.click()
+
+    def setWifi(self):
+        self.display.writeText('Scanning Wifi')
+        output = subprocess.call(["iwlist", "wlan0", "scan"])
+        print(output)
+        self.click()
 
     def click(self):
         if not self.active:
@@ -80,5 +87,7 @@ class SettingsState:
             self.item_selected = True
             if self.currentPosition == 0:
                 self.changeColour(0)
-            else:
+            if self.currentPosition == 1:
                 self.pair()
+            if self.currentPosition == 1:
+                self.setWifi()
