@@ -76,7 +76,7 @@ class SettingsState:
         process = subprocess.Popen(["iwlist", "wlan0", "scan"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = process.communicate()
         print(output)
-        networks = re.findall(r'(?<=ESSID:")[^"]+', output)
+        networks = re.findall(r'(?<=ESSID:")[^"]+', output.decode("utf-8"))
         print(networks)
         self.click()
 
