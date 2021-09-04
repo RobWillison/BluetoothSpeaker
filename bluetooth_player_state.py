@@ -35,8 +35,8 @@ class BluetoothPlayerState:
 
     def runTrackChangeAnimation(self, newTrack, newArtist):
         newState = [[],[]]
-        newState[0] = bytearray(self.cropText(newTrack).ljust(16), 'utf-8')
-        newState[1] = bytearray(self.cropText(newArtist).ljust(16), 'utf-8')
+        newState[0] = bytearray(self.display.cropText(newTrack).ljust(16), 'utf-8')
+        newState[1] = bytearray(self.display.cropText(newArtist).ljust(16), 'utf-8')
 
         frames = []
         for i in range(16, -1, -1):
@@ -46,7 +46,7 @@ class BluetoothPlayerState:
             frame[1] = [-1]*i + list(newState[1][i:-1])
 
             frames.append(frame)
-            
+
         self.display.addFrames(frames)
 
     def onEncoderTick(self, direction):
