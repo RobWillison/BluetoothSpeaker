@@ -31,8 +31,8 @@ class SettingsState:
             self.changeColour(direction)
         else:
             self.currentPosition -= direction
-            if self.currentPosition > 1:
-                self.currentPosition = 1
+            if self.currentPosition > len(self.options)-1:
+                self.currentPosition = len(self.options)-1
             if self.currentPosition < 0:
                 self.currentPosition = 0
 
