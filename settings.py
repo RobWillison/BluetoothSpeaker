@@ -17,6 +17,11 @@ class SettingsState:
         self.encoder.addTurnCallback(self.move)
         self.encoder.addShortPressCallback(self.click)
 
+        self.state = ''
+
+        self.wifi_networks = []
+        self.selected_network = 0
+
     def activate(self):
         self.active = True
         self.display.writeText('Settings', self.options[0])
@@ -29,7 +34,10 @@ class SettingsState:
             return
 
         if self.item_selected:
-            self.changeColour(direction)
+            if self.state == 'SELECT COLOUR':
+                self.changeColour(direction)
+            if self.state == 'SELECT WIFI':
+                self.scrollWifiNetworks(direction)
         else:
             self.currentPosition -= direction
             if self.currentPosition > len(self.options)-1:
@@ -40,6 +48,7 @@ class SettingsState:
             self.display.writeText('Settings', self.options[self.currentPosition])
 
     def changeColour(self, direction):
+        self.state = 'SELECT COLOUR'
         self.colourValue -= direction
         steps = 14*5
 
@@ -71,14 +80,24 @@ class SettingsState:
         subprocess.Popen(["/bin/bash","scripts/pair_and_trust.sh", ">>", "bluetoothSpeaker.log"])
         self.click()
 
+    def scrollWifiNetworks(self, direction):
+        self.selected_network -= direction
+        if self.selected_network < 0:
+            self.selected_network = 0
+        if self.selected_network > len(self.wifi_networks)-1:
+            self.selected_network = len(self.wifi_networks)-1
+
+        self.display.writeText('Select Wifi', self.wifi_networks[self.selected_network])
+
     def setWifi(self):
         self.display.writeText('Scanning Wifi')
         process = subprocess.Popen(["iwlist", "wlan0", "scan"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = process.communicate()
         print(output)
         networks = re.findall(r'(?<=ESSID:")[^"]+', output.decode("utf-8"))
-        print(networks)
-        self.click()
+        self.wifi_networks = networks
+        self.selected_network = 0
+        self.display.writeText('Select Wifi', self.wifi_networks[0])
 
     def click(self):
         if not self.active:
@@ -87,6 +106,7 @@ class SettingsState:
         if self.item_selected:
             self.item_selected = False
             self.display.writeText('Settings', self.options[self.currentPosition])
+            self.state = ''
         else:
             self.item_selected = True
             if self.currentPosition == 0:

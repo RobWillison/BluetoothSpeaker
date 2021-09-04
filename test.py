@@ -28,9 +28,11 @@ class Radio:
 
     def longPress(self):
         if self.currentState == 'PLAYER':
+            self.currentState = 'SETTINGS'
             self.player_state.deactivate()
             self.settings_state.activate()
         else:
+            self.currentState = 'PLAYER'
             self.settings_state.deactivate()
             self.player_state.activate()
 
