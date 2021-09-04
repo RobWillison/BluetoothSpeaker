@@ -75,6 +75,7 @@ class SettingsState:
         self.display.writeText('Scanning Wifi')
         process = subprocess.Popen(['ls', '-a'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = process.communicate()
+        print(output)
         networks = re.findall(r'(?<=ESSID:")[^"]+', output)
         print(networks)
         self.click()
