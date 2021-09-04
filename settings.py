@@ -1,6 +1,7 @@
 import math
 import json
 import subprocess
+import re
 
 class SettingsState:
     def __init__(self, display, player, encoder):
@@ -73,7 +74,8 @@ class SettingsState:
     def setWifi(self):
         self.display.writeText('Scanning Wifi')
         output = subprocess.call(["iwlist", "wlan0", "scan"])
-        print(output)
+        networks = re.findall(r'(?<=ESSID:")[^"]+')
+        print(networks)
         self.click()
 
     def click(self):
