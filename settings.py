@@ -98,6 +98,7 @@ class SettingsState:
         self.wifi_networks = networks
         self.selected_network = 0
         self.display.writeText('Select Wifi', self.wifi_networks[0])
+        self.state = 'SELECT WIFI'
 
     def click(self):
         if not self.active:
