@@ -41,21 +41,6 @@ class Display:
 
             time.sleep(0.05)
 
-    def runTrackChangeAnimation(self, newTrack, newArtist):
-        newState = [[],[]]
-        newState[0] = bytearray(self.cropText(newTrack).ljust(16), 'utf-8')
-        newState[1] = bytearray(self.cropText(newArtist).ljust(16), 'utf-8')
-
-        frames = []
-        for i in range(16, -1, -1):
-            frame = [[], []]
-
-            frame[0] = [-1]*i + list(newState[0][i:-1])
-            frame[1] = [-1]*i + list(newState[1][i:-1])
-
-            frames.append(frame)
-        self.displayState += frames
-
     def updateDisplay(self, displayData):
         try:
             for row_index, row in enumerate(displayData):
@@ -99,14 +84,6 @@ class Display:
             return text[0:11] + '...'
         return text
 
-
-    def trackChanged(self, track, artist, album):
-        self.track = track
-        self.artist = artist
-        self.album = album
-        self.runTrackChangeAnimation(track, artist)
-
-
     def pausedStatusChanged(self, paused):
         newState = [[],[]]
         if paused:
@@ -129,6 +106,9 @@ class Display:
         newState[1] = line2
 
         self.displayState.append(newState)
+
+    def addFrames(self, frames):
+        self.displayState += frames
 
     def writeText(self, line1, line2):
         newState = [[],[]]
