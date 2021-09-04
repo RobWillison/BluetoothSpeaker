@@ -1,5 +1,6 @@
 import math
 import json
+import subprocess
 
 class SettingsState:
     def __init__(self, display, player, encoder):
@@ -65,7 +66,8 @@ class SettingsState:
             json.dump({'red': r, 'green': g, 'blue': b}, outfile)
 
     def pair(self):
-        self.display.writeText('Pairing')
+        self.display.writeText('Pairing', 'Waiting to pair')
+        output = subprocess.call(["/bin/bash","scripts/pair_and_trust.sh", ">>", "bluetoothSpeaker.log"])
 
     def click(self):
         if not self.active:
