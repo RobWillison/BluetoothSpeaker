@@ -16,11 +16,11 @@ class SettingsState:
         self.encoder.addShortPressCallback(self.click)
 
     def activate(self):
-        self.open = True
+        self.active = True
         self.display.writeText('Settings', self.options[0])
 
     def deactivate(self):
-        self.open = False
+        self.active = False
 
     def move(self, direction):
         if not self.active:
