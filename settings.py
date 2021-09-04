@@ -4,23 +4,28 @@ import json
 class SettingsState:
     def __init__(self, display, player, encoder):
         self.display = display
-        self.display = encoder
-        self.display = player
-        self.open = False
+        self.encoder = encoder
+        self.player = player
+        self.active = False
         self.options = ['Change Colour  <', 'Pair Device    <']
         self.currentPosition = 0
         self.item_selected = False
         self.colourValue = 0
 
-    def openClose(self):
-        if self.open:
-            self.open = False
-            self.display.writeTrackInfo()
-        else:
-            self.open = True
-            self.display.writeText('Settings', self.options[0])
+        self.encoder.addTurnCallback(self.move)
+        self.encoder.addShortPressCallback(self.click)
+
+    def activate(self):
+        self.open = True
+        self.display.writeText('Settings', self.options[0])
+
+    def deactivate(self):
+        self.open = False
 
     def move(self, direction):
+        if not self.active:
+            return
+
         if self.item_selected:
             self.changeColour(direction)
         else:
@@ -63,6 +68,9 @@ class SettingsState:
         self.display.writeText('Pairing')
 
     def click(self):
+        if not self.active:
+            return
+
         if self.item_selected:
             self.item_selected = False
             self.display.writeText('Settings', self.options[self.currentPosition])

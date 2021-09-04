@@ -13,7 +13,12 @@ class BluetoothPlayerState:
         self.last_tick = 0
         self.tick_count = 0
 
+        self.active = False
+
     def togglePause(self):
+        if not self.active:
+            return
+
         line1 = [-1]*16
         line2 = [-1]*16
 
@@ -26,9 +31,16 @@ class BluetoothPlayerState:
         self.display.writeData(line1, line2)
 
     def activate(self):
+        self.active = True
         self.displayTrackInfo()
 
+    def deactivate(self):
+        self.active = False
+
     def displayTrackInfo(self):
+        if not self.active:
+            return
+
         title = self.player.title
         artist = self.player.artist
         self.runTrackChangeAnimation(title, artist)
@@ -50,6 +62,9 @@ class BluetoothPlayerState:
         self.display.addFrames(frames)
 
     def onEncoderTick(self, direction):
+        if not self.active:
+            return
+
         now = time.time()
         if now - self.last_tick > 1:
             self.tick_count = 0
