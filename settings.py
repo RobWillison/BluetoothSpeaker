@@ -68,12 +68,13 @@ class SettingsState:
 
     def pair(self):
         self.display.writeText('Pairing', 'Waiting to pair')
-        output = subprocess.call(["/bin/bash","scripts/pair_and_trust.sh", ">>", "bluetoothSpeaker.log"])
+        subprocess.Popen(["/bin/bash","scripts/pair_and_trust.sh", ">>", "bluetoothSpeaker.log"])
         self.click()
 
     def setWifi(self):
         self.display.writeText('Scanning Wifi')
-        output = subprocess.call(["iwlist", "wlan0", "scan"])
+        process = subprocess.Popen(['ls', '-a'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, err = process.communicate()
         networks = re.findall(r'(?<=ESSID:")[^"]+', output)
         print(networks)
         self.click()
