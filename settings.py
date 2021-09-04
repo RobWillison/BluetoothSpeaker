@@ -74,7 +74,7 @@ class SettingsState:
     def setWifi(self):
         self.display.writeText('Scanning Wifi')
         output = subprocess.call(["iwlist", "wlan0", "scan"])
-        networks = re.findall(r'(?<=ESSID:")[^"]+')
+        networks = re.findall(r'(?<=ESSID:")[^"]+', output)
         print(networks)
         self.click()
 
