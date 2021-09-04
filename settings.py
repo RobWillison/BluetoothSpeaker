@@ -89,5 +89,5 @@ class SettingsState:
                 self.changeColour(0)
             if self.currentPosition == 1:
                 self.pair()
-            if self.currentPosition == 1:
+            if self.currentPosition == 2:
                 self.setWifi()
