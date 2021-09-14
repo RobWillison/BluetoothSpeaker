@@ -10,14 +10,14 @@ from bluetooth_player_state import BluetoothPlayerState
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(22, GPIO.OUT)
-GPIO.output(22, GPIO.HIGH)
+GPIO.setup(27, GPIO.OUT)
+GPIO.output(27, GPIO.HIGH)
 
 class Radio:
     def __init__(self):
         self.display = Display()
         self.player = Player()
-        self.encoder = SkipNStettingEncoder(4, 22, 17)
+        self.encoder = SkipNStettingEncoder(4, 10, 17)
 
         self.settings_state = SettingsState(self.display, self.player, self.encoder)
         self.player_state = BluetoothPlayerState(self.display, self.player, self.encoder)
