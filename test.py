@@ -10,8 +10,8 @@ from bluetooth_player_state import BluetoothPlayerState
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(27, GPIO.OUT)
-GPIO.output(27, GPIO.HIGH)
+GPIO.setup(22, GPIO.OUT)
+GPIO.output(22, GPIO.HIGH)
 
 class Radio:
     def __init__(self):
