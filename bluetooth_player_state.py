@@ -1,5 +1,7 @@
 import time
 import adafruit_max9744
+import board
+import busio
 
 class BluetoothPlayerState:
     def __init__(self, display, player, encoder, volume_encoder):
