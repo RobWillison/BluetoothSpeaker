@@ -1,14 +1,16 @@
 import time
 
 class BluetoothPlayerState:
-    def __init__(self, display, player, encoder):
+    def __init__(self, display, player, encoder, volume_encoder):
         self.display = display
         self.player = player
         self.encoder = encoder
+        self.volume_encoder = volume_encoder
 
         self.encoder.addShortPressCallback(self.togglePause)
         self.encoder.addTurnCallback(self.onEncoderTick)
         self.player.addUpdateCallback(self.displayTrackInfo)
+        self.volume_encoder.addTurnCallback(self.changeVolume)
 
         self.last_tick = 0
         self.tick_count = 0
@@ -80,3 +82,6 @@ class BluetoothPlayerState:
         if self.tick_count < -5:
             self.player.prev()
             self.tick_count = 0
+
+    def changeVolume(self, direction):
+        print('Volume ' + str(direction))
