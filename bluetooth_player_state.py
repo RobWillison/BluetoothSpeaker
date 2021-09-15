@@ -1,4 +1,5 @@
 import time
+import adafruit_max9744
 
 class BluetoothPlayerState:
     def __init__(self, display, player, encoder, volume_encoder):
@@ -16,6 +17,12 @@ class BluetoothPlayerState:
         self.tick_count = 0
 
         self.active = False
+
+        # Initialize I2C bus.
+        i2c = busio.I2C(board.SCL, board.SDA)
+
+        # Initialize amplifier.
+        self.amp = adafruit_max9744.MAX9744(i2c)
 
     def togglePause(self):
         if not self.active:
@@ -84,4 +91,7 @@ class BluetoothPlayerState:
             self.tick_count = 0
 
     def changeVolume(self, direction):
-        print('Volume ' + str(direction))
+        if direction == 1:
+            self.amp.volume_up()
+        else:
+            self.amp.volume_down()
