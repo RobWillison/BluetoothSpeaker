@@ -28,6 +28,7 @@ class SettingsState:
 
     def deactivate(self):
         self.active = False
+        self.display.writeText('                ', '                ')
 
     def move(self, direction):
         if not self.active:
